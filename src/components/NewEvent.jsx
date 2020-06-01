@@ -1,7 +1,10 @@
 import React from "react";
 import BaseButton from "./shared/BaseButton";
 
-const MyComponent = () => {
+const NewEvent = () => {
+  const handleChange = event => {
+    console.log(event.target.value);
+  };
   return (
     <div className="max-w-2xl mx-auto py-16">
       <label className="block mb-3">
@@ -9,6 +12,7 @@ const MyComponent = () => {
         <input
           className="form-input mt-1 block w-full"
           placeholder="Daily Standup"
+          onChange={handleChange}
         />
       </label>
 
@@ -25,4 +29,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default NewEvent;
