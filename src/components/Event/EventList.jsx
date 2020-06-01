@@ -1,9 +1,9 @@
 import React from "react";
 
-const EventList = props => {
+const EventList = ({ events }) => {
   return (
     <ul>
-      {props.events.map(event => (
+      {events.map(event => (
         <li key={event.id}>
           {event.title} {event.link}
         </li>

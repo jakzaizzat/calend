@@ -1,8 +1,8 @@
 import React from "react";
-import Dashboard from "./components/Dashboard";
-import NewEvent from "./components/NewEvent";
+import Dashboard from "../Dashboard/Dashboard";
+import NewEvent from "../Event/NewEvent";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
+import "../../App.css";
 
 const App = () => {
   return (
