@@ -19,9 +19,12 @@ const NewEvent = () => {
       JSON.parse(localStorage.getItem(key)) || initialState
     );
 
-    useEffect(() => {
-      localStorage.setItem(key, JSON.stringify(event));
-    }, [event]);
+    useEffect(
+      key => {
+        localStorage.setItem(key, JSON.stringify(event));
+      },
+      [event]
+    );
 
     return [event, setEvent];
   };

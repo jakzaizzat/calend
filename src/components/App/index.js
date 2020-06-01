@@ -1,6 +1,7 @@
 import React from "react";
 import Dashboard from "../Dashboard/Dashboard";
 import NewEvent from "../Event/NewEvent";
+import Login from "../Login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "../../App.css";
 
@@ -26,6 +27,9 @@ const App = () => {
             </Route>
             <Route path="/new">
               <NewEvent />
+            </Route>
+            <Route path="/">
+              <Login />
             </Route>
           </Switch>
         </div>
