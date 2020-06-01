@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BaseButton from "../shared/BaseButton";
+import Input from "../shared/Input";
 
 const NewEvent = () => {
   const handleInputChange = e => {
@@ -32,28 +33,21 @@ const NewEvent = () => {
 
   return (
     <div className="max-w-2xl mx-auto py-16">
-      <label className="block mb-3">
-        <span className="text-gray-700">Event name</span>
-        <input
-          className="form-input mt-1 block w-full"
-          placeholder="Daily Standup"
-          name="name"
-          value={event.name}
-          onChange={handleInputChange}
-        />
-      </label>
+      <Input
+        id="name"
+        label="Event name"
+        value={event.name}
+        onChange={handleInputChange}
+        placeholder="Daily Standup"
+      />
 
-      <label className="block mb-3">
-        <span className="text-gray-700">Link</span>
-        <input
-          className="form-input mt-1 block w-full"
-          placeholder="http://google.com"
-          name="link"
-          value={event.link}
-          onChange={handleInputChange}
-        />
-      </label>
-
+      <Input
+        id="link"
+        label="Link"
+        value={event.link}
+        onChange={handleInputChange}
+        placeholder="http://google.com"
+      />
       <BaseButton onClick={handleButton}>Submit</BaseButton>
     </div>
   );
