@@ -4,12 +4,18 @@ import BaseButton from "../shared/BaseButton";
 import Event from "./Event";
 
 const EventList = ({ events }) => {
+  const handleAddButton = () => {
+    console.log("Button clicked");
+  };
+
   return (
     <>
       <div className="max-w-2xl mx-auto">
         <Card
           title="List of events"
-          action={<BaseButton>Create new event</BaseButton>}
+          action={
+            <BaseButton onClick={handleAddButton}>Create new event</BaseButton>
+          }
         >
           <ul>
             {events.map(event => (

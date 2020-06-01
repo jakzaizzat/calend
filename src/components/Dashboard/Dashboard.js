@@ -16,7 +16,7 @@ const events = [
   }
 ];
 
-const MyComponent = () => {
+const Dashboard = () => {
   return (
     <div>
       <EventList events={events} />
@@ -24,4 +24,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default Dashboard;
