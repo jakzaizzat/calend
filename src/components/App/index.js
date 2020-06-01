@@ -7,7 +7,7 @@ import "../../App.css";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App bg-gray-200 min-h-screen">
       <Router>
         <div>
           <nav>
@@ -20,18 +20,19 @@ const App = () => {
               </li>
             </ul>
           </nav>
-
-          <Switch>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/new">
-              <NewEvent />
-            </Route>
-            <Route path="/">
-              <Login />
-            </Route>
-          </Switch>
+          <div className="py-16">
+            <Switch>
+              <Route path="/dashboard">
+                <Dashboard />
+              </Route>
+              <Route path="/new">
+                <NewEvent />
+              </Route>
+              <Route path="/">
+                <Login />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </Router>
     </div>
