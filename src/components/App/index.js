@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "../Dashboard/Dashboard";
+import Index from "../Dashboard";
 import NewEvent from "../Event/NewEvent";
 import Navigation from "../shared/Navigation";
 import Login from "../Login";
@@ -15,7 +15,7 @@ const App = () => {
           <div className="py-16">
             <Switch>
               <Route path="/dashboard">
-                <Dashboard />
+                <Index />
               </Route>
               <Route path="/new">
                 <NewEvent />

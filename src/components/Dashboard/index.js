@@ -16,7 +16,7 @@ const events = [
   }
 ];
 
-const Dashboard = () => {
+const Index = () => {
   return (
     <div>
       <EventList events={events} />
@@ -24,4 +24,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Index;
