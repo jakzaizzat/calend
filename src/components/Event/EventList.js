@@ -3,9 +3,10 @@ import Card from "../shared/Card";
 import BaseButton from "../shared/BaseButton";
 import Event from "./Event";
 
-const EventList = ({ events }) => {
+const EventList = props => {
   const handleAddButton = () => {
     console.log("Button clicked");
+    props.onCreateModal();
   };
 
   return (
@@ -18,7 +19,7 @@ const EventList = ({ events }) => {
           }
         >
           <ul>
-            {events.map(event => (
+            {props.events.map(event => (
               <Event key={event.id} id={event.id} title={event.title} />
             ))}
           </ul>
