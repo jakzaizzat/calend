@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BaseButton from "../shared/BaseButton";
 import Input from "../shared/Input";
+import InputSelect from "../shared/InputSelect";
 
 const NewEvent = () => {
   const handleInputChange = e => {
@@ -12,6 +13,7 @@ const NewEvent = () => {
   };
 
   const handleButton = () => {
+    // TODO: Integrate with REST
     console.log(event);
   };
   const useSemiPersistenceState = (key, initialState) => {
@@ -28,14 +30,24 @@ const NewEvent = () => {
 
     return [event, setEvent];
   };
-
+  const eventTypes = [
+    {
+      id: 1,
+      value: "One to One"
+    },
+    {
+      id: 2,
+      value: "Many to many"
+    }
+  ];
   const [event, setEvent] = useSemiPersistenceState("event", {
     name: "",
-    link: ""
+    link: "",
+    type: ""
   });
 
   return (
-    <div className="max-w-2xl mx-auto py-16">
+    <div>
       <Input
         id="name"
         label="Event name"
@@ -51,6 +63,15 @@ const NewEvent = () => {
         onChange={handleInputChange}
         placeholder="http://google.com"
       />
+
+      <InputSelect
+        label="Event Type"
+        id="type"
+        value={event.type}
+        options={eventTypes}
+        onChange={handleInputChange}
+      />
+
       <BaseButton onClick={handleButton}>Submit</BaseButton>
     </div>
   );
