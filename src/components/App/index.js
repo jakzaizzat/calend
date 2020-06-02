@@ -3,6 +3,7 @@ import Index from "../Dashboard";
 import NewEvent from "../Event/NewEvent";
 import Navigation from "../shared/Navigation";
 import Login from "../Login";
+import EventView from "../Event/View";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../../App.css";
 
@@ -19,6 +20,9 @@ const App = () => {
               </Route>
               <Route path="/new">
                 <NewEvent />
+              </Route>
+              <Route path="/event/:id">
+                <EventView />
               </Route>
               <Route path="/">
                 <Login />

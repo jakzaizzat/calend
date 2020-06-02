@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Event = ({ title }) => {
+const Event = ({ id, title }) => {
   return (
-    <li>
+    <Link to={"/event/" + id}>
       <span className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
         <div className="px-4 py-4 sm:px-6">
           <div className="flex items-center justify-between">
@@ -31,7 +32,7 @@ const Event = ({ title }) => {
           </div>
         </div>
       </span>
-    </li>
+    </Link>
   );
 };
 

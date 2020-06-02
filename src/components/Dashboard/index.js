@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EventList from "../Event/EventList";
 
-const events = [
+const initialEvents = [
   {
     id: 1,
     title: "30 minutes consultation",
@@ -17,6 +17,18 @@ const events = [
 ];
 
 const Index = () => {
+  const getAsyncEvent = () => {
+    return new Promise(resolve =>
+      setTimeout(() => resolve({ data: { events: initialEvents } }), 2000)
+    );
+  };
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    getAsyncEvent().then(result => {
+      setEvents(result.data.events);
+    });
+  }, []);
+
   return (
     <div>
       <EventList events={events} />

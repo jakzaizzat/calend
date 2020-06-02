@@ -19,7 +19,7 @@ const EventList = ({ events }) => {
         >
           <ul>
             {events.map(event => (
-              <Event key={event.id} title={event.title} />
+              <Event key={event.id} id={event.id} title={event.title} />
             ))}
           </ul>
         </Card>
