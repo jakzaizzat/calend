@@ -23,15 +23,22 @@ const Index = () => {
     );
   };
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
-    getAsyncEvent().then(result => {
-      setEvents(result.data.events);
-    });
+    setIsLoading(true);
+    getAsyncEvent()
+      .then(result => {
+        setEvents(result.data.events);
+      })
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <div>
-      <EventList events={events} />
+      {isError && <p>Something when wrong</p>}
+      {isLoading ? <p>Loading...</p> : <EventList events={events} />}
     </div>
   );
 };
