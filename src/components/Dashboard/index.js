@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import EventList from "../Event/EventList";
 import Modal from "../shared/Modal";
 import NewEvent from "../Event/NewEvent";
+import Loading from "../shared/Loading";
 
 const initialEvents = [
   {
@@ -62,11 +63,11 @@ const Index = () => {
         </Modal>
       ) : null}
       {isError && <p>Something when wrong</p>}
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <EventList events={events} onCreateModal={handleToggle} />
-      )}
+      <EventList
+        events={events}
+        isLoading={isLoading}
+        onCreateModal={handleToggle}
+      />
     </div>
   );
 };
