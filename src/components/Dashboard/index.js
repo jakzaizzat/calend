@@ -2,7 +2,6 @@ import React, { useEffect, useReducer, useState } from "react";
 import EventList from "../Event/EventList";
 import Modal from "../shared/Modal";
 import NewEvent from "../Event/NewEvent";
-import Loading from "../shared/Loading";
 
 const initialEvents = [
   {
@@ -20,10 +19,24 @@ const initialEvents = [
 ];
 
 const eventReducer = (state, action) => {
-  if (action.type === "SET_EVENTS") {
-    return action.payload;
-  } else {
-    throw new Error();
+  switch (action.type) {
+    case "EVENTS_FETCH_INIT":
+      return { ...state, isLoading: true, isError: false };
+    case "SET_EVENTS":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload
+      };
+    case "EVENTS_FETCH_FAIL":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      };
+    default:
+      throw new Error();
   }
 };
 
@@ -33,13 +46,18 @@ const Index = () => {
       setTimeout(() => resolve({ data: { events: initialEvents } }), 2000)
     );
   };
-  const [events, dispatchEvent] = useReducer(eventReducer, []);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [events, dispatchEvent] = useReducer(eventReducer, {
+    data: [],
+    isLoading: false,
+    isError: false
+  });
+
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    dispatchEvent({
+      type: "EVENTS_FETCH_INIT"
+    });
     getAsyncEvent()
       .then(result => {
         dispatchEvent({
@@ -47,8 +65,11 @@ const Index = () => {
           payload: result.data.events
         });
       })
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+      .catch(() => {
+        dispatchEvent({
+          type: "EVENTS_FETCH_FAIL"
+        });
+      });
   }, []);
 
   const handleToggle = () => {
@@ -62,12 +83,15 @@ const Index = () => {
           <NewEvent />
         </Modal>
       ) : null}
-      {isError && <p>Something when wrong</p>}
-      <EventList
-        events={events}
-        isLoading={isLoading}
-        onCreateModal={handleToggle}
-      />
+      {events.isError ? (
+        <p>Something when wrong</p>
+      ) : (
+        <EventList
+          events={events.data}
+          isLoading={events.isLoading}
+          onCreateModal={handleToggle}
+        />
+      )}
     </div>
   );
 };
