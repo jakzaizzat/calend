@@ -5,7 +5,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
   @-webkit-keyframes rotating /* Safari and Chrome */ {
     from {
       -webkit-transform: rotate(0deg);
@@ -52,7 +51,7 @@ const Loading = () => {
         height="24"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="#333333"
+        stroke="#ffffff"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

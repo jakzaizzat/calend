@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../components/shared/Input";
 import BaseButton from "../components/shared/BaseButton";
+import toast from "toasted-notes";
+import * as authAPI from "../api/auth-api-mock";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+  const [user, setUser] = useState({
+    username: "admin",
+    password: "admin"
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInputChange = e => {
+    e.persist();
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    });
+  };
+  let history = useHistory();
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    try {
+      const response = await authAPI.login(user);
+      localStorage.setItem("token", response.token);
+      toast.notify("Successfully login");
+      history.push("/dashboard");
+    } catch {
+      toast.notify("Your username/password is incorrect");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -10,15 +41,28 @@ const Login = () => {
           Sign in to your account
         </h2>
       </div>
-
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form action="#" method="POST">
-            <Input id="email" label="Email address" type="email" />
-            <Input id="password" label="Password" type="password" />
+            <Input
+              id="username"
+              label="Username"
+              type="username"
+              value={user.username}
+              onChange={handleInputChange}
+            />
+            <Input
+              id="password"
+              label="Password"
+              type="password"
+              value={user.password}
+              onChange={handleInputChange}
+            />
 
             <div className="mt-6">
-              <BaseButton>Sign in</BaseButton>
+              <BaseButton onClick={handleSubmit} isLoading={isLoading}>
+                Sign in
+              </BaseButton>
             </div>
           </form>
         </div>

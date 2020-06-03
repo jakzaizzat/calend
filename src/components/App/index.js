@@ -5,6 +5,7 @@ import Navigation from "../shared/Navigation";
 import Login from "../../pages/Login";
 import EventView from "../../pages/Events/View";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import 'toasted-notes/src/styles.css';
 import "../../App.css";
 
 const App = () => {
