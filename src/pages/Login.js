@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../shared/Input";
-import BaseButton from "../shared/BaseButton";
+import Input from "../components/shared/Input";
+import BaseButton from "../components/shared/BaseButton";
 
 const Login = () => {
   return (

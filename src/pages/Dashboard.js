@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, useState } from "react";
-import EventList from "../Event/EventList";
-import Modal from "../shared/Modal";
-import NewEvent from "../Event/NewEvent";
-import * as eventAPI from "../../api/events-api-mock";
+import EventList from "../components/Event/EventList";
+import Modal from "../components/shared/Modal";
+import NewEvent from "../components/Event/NewEvent";
+import * as eventAPI from "../api/events-api-mock";
 
 const eventReducer = (state, action) => {
   switch (action.type) {
@@ -26,7 +26,7 @@ const eventReducer = (state, action) => {
   }
 };
 
-const Index = () => {
+const Dashboard = () => {
   const [events, dispatchEvent] = useReducer(eventReducer, {
     data: [],
     isLoading: false,
@@ -78,4 +78,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Dashboard;

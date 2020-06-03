@@ -1,9 +1,9 @@
 import React from "react";
-import Index from "../Dashboard";
+import Index from "../../pages/Dashboard";
 import NewEvent from "../Event/NewEvent";
 import Navigation from "../shared/Navigation";
-import Login from "../Login";
-import EventView from "../Event/View";
+import Login from "../../pages/Login";
+import EventView from "../../pages/Events/View";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../../App.css";
 
