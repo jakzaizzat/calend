@@ -2,21 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import EventList from "../Event/EventList";
 import Modal from "../shared/Modal";
 import NewEvent from "../Event/NewEvent";
-
-const initialEvents = [
-  {
-    id: 1,
-    title: "30 minutes consultation",
-    active: true,
-    link: "http://google.com"
-  },
-  {
-    id: 2,
-    title: "15 minutes consultation",
-    active: false,
-    link: "http://google.com"
-  }
-];
+import * as eventAPI from "../../api/events-api-mock";
 
 const eventReducer = (state, action) => {
   switch (action.type) {
@@ -41,11 +27,6 @@ const eventReducer = (state, action) => {
 };
 
 const Index = () => {
-  const getAsyncEvent = () => {
-    return new Promise(resolve =>
-      setTimeout(() => resolve({ data: { events: initialEvents } }), 2000)
-    );
-  };
   const [events, dispatchEvent] = useReducer(eventReducer, {
     data: [],
     isLoading: false,
@@ -58,11 +39,12 @@ const Index = () => {
     dispatchEvent({
       type: "EVENTS_FETCH_INIT"
     });
-    getAsyncEvent()
+    eventAPI
+      .findAll()
       .then(result => {
         dispatchEvent({
           type: "SET_EVENTS",
-          payload: result.data.events
+          payload: result
         });
       })
       .catch(() => {
