@@ -4,7 +4,18 @@ import BaseButton from "../shared/BaseButton";
 import Event from "./Event";
 import Loading from "../shared/Loading";
 
-const EventList = props => {
+type Event = {
+  id: number;
+  name: string;
+  link: string;
+  type: string;
+};
+
+const EventList = (props: {
+  onCreateModal: () => void;
+  isLoading: boolean;
+  events: Array<Event>;
+}) => {
   const handleAddButton = () => {
     console.log("Button clicked");
     props.onCreateModal();
@@ -24,7 +35,7 @@ const EventList = props => {
           ) : (
             <ul>
               {props.events.map(event => (
-                <Event key={event.id} id={event.id} title={event.title} />
+                <Event key={event.id} id={event.id} title={event.name} />
               ))}
             </ul>
           )}

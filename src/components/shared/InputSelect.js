@@ -16,7 +16,6 @@ const InputSelect = ({ id, label, value, options = [], onChange }) => {
             {option.value}
           </option>
         ))}
-        >
       </select>
     </label>
   );

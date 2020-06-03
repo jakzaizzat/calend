@@ -3,8 +3,14 @@ import BaseButton from "../shared/BaseButton";
 import Input from "../shared/Input";
 import InputSelect from "../shared/InputSelect";
 
+type Event = {
+  name: string;
+  link: string;
+  type: string;
+};
+
 const NewEvent = () => {
-  const handleInputChange = e => {
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     e.persist();
     setEvent({
       ...event,
@@ -16,17 +22,14 @@ const NewEvent = () => {
     // TODO: Integrate with REST
     console.log(event);
   };
-  const useSemiPersistenceState = (key, initialState) => {
+  const useSemiPersistenceState = (key: string, initialState: Event) => {
     const [event, setEvent] = useState(
-      JSON.parse(localStorage.getItem(key)) || initialState
+      JSON.parse(localStorage.getItem(key) as string) || initialState
     );
 
-    useEffect(
-      key => {
-        localStorage.setItem(key, JSON.stringify(event));
-      },
-      [event]
-    );
+    useEffect(() => {
+      localStorage.setItem(key, JSON.stringify(event));
+    }, [event, key]);
 
     return [event, setEvent];
   };
