@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../components/shared/Input";
 import BaseButton from "../components/shared/BaseButton";
 import toast from "toasted-notes";
 import * as authAPI from "../api/auth-api-mock";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../state/UserContext";
 
 const Login = () => {
+  const { auth, setAuth } = useContext(UserContext);
+
   const [user, setUser] = useState({
     username: "admin",
     password: "admin"
   });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = e => {
@@ -19,6 +23,7 @@ const Login = () => {
       [e.target.name]: e.target.value
     });
   };
+
   let history = useHistory();
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -26,6 +31,7 @@ const Login = () => {
       const response = await authAPI.login(user);
       localStorage.setItem("token", response.token);
       toast.notify("Successfully login");
+      setAuth(response);
       history.push("/dashboard");
     } catch {
       toast.notify("Your username/password is incorrect");
