@@ -30,7 +30,7 @@ const AuthRoute = ({ children, ...rest }) => (
     {...rest}
     render={({ location }) =>
       checkAuth() ? (
-        children
+        <div className="py-16">{children}</div>
       ) : (
         <Redirect
           to={{
@@ -58,22 +58,20 @@ const App = () => {
         <UserContext.Provider value={providerAuth}>
           <div>
             {auth ? <Navigation /> : null}
-            <div className="py-16">
-              <Switch>
-                <AuthRoute path="/dashboard">
-                  <Dashboard />
-                </AuthRoute>
-                <AuthRoute path="/new">
-                  <NewEvent />
-                </AuthRoute>
-                <AuthRoute path="/event/:id">
-                  <EventView />
-                </AuthRoute>
-                <Route path="/">
-                  <Login />
-                </Route>
-              </Switch>
-            </div>
+            <Switch>
+              <AuthRoute path="/dashboard">
+                <Dashboard />
+              </AuthRoute>
+              <AuthRoute path="/new">
+                <NewEvent />
+              </AuthRoute>
+              <AuthRoute path="/event/:id">
+                <EventView />
+              </AuthRoute>
+              <Route path="/">
+                <Login />
+              </Route>
+            </Switch>
           </div>
         </UserContext.Provider>
       </Router>
