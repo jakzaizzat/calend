@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import * as eventAPI from "../../api/events-api-mock";
 
 const EventView = () => {
@@ -28,9 +28,9 @@ const EventView = () => {
                 {event.description}
               </p>
             </div>
-            <div>
+            <div className="py-4">
               <dl>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Status
                   </dt>
@@ -38,22 +38,20 @@ const EventView = () => {
                     {event.active ? "Active" : "Inactive"}
                   </dd>
                 </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Link
                   </dt>
                   <dd className="mt-1 flex items-center text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                    <a
-                      href={event.link}
-                      target="_blank"
-                      id="eventLink"
+                    <Link
+                      to={"/booking/" + event.id}
                       className="text-indigo-700 mr-3"
                     >
-                      {event.link}
-                    </a>
+                      {window.location.origin}/booking/{event.id}
+                    </Link>
                   </dd>
                 </div>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm leading-5 font-medium text-gray-500">
                     Duration
                   </dt>

@@ -15,6 +15,7 @@ import {
 import "toasted-notes/src/styles.css";
 import "./App.css";
 import mock from "./config/mock";
+import BookingView from "./pages/Booking/View";
 
 const checkAuth = () => {
   const token = localStorage.getItem("token");
@@ -68,6 +69,9 @@ const App = () => {
               <AuthRoute path="/event/:id">
                 <EventView />
               </AuthRoute>
+              <Route path="/booking/:id">
+                <BookingView />
+              </Route>
               <Route path="/">
                 <Login />
               </Route>

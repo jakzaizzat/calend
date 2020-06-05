@@ -5,7 +5,7 @@ const events = [
     description: "Lorem ipsum lorem ipsum",
     active: true,
     link: "http://google.com",
-    duration: "30 minutes",
+    duration: 30,
     days: ["Monday, Tuesday"],
     timeStart: "09:00 A.M",
     timeEnd: "03:00 P.M"
@@ -16,7 +16,7 @@ const events = [
     description: "Lorem ipsum lorem ipsum",
     active: true,
     link: "http://google.com",
-    duration: "30 minutes",
+    duration: 30,
     days: ["Monday, Tuesday"],
     timeStart: "09:00 A.M",
     timeEnd: "03:00 P.M"
