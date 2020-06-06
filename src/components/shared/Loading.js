@@ -42,7 +42,7 @@ const Container = styled.div`
   }
 `;
 
-const Loading = () => {
+const Loading = ({ color = "#ffffff" }) => {
   return (
     <Container>
       <svg
@@ -51,7 +51,7 @@ const Loading = () => {
         height="24"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="#ffffff"
+        stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

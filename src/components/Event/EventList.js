@@ -12,7 +12,7 @@ const EventList = props => {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto my-5">
         <Card
           title="List of events"
           action={
@@ -20,7 +20,9 @@ const EventList = props => {
           }
         >
           {props.isLoading ? (
-            <Loading />
+            <div className="my-3">
+              <Loading color="#333333" />
+            </div>
           ) : (
             <ul>
               {props.events.map(event => (

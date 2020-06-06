@@ -31,7 +31,7 @@ const AuthRoute = ({ children, ...rest }) => (
     {...rest}
     render={({ location }) =>
       checkAuth() ? (
-        <div className="py-16">{children}</div>
+        <div className="py-0">{children}</div>
       ) : (
         <Redirect
           to={{
