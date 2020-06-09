@@ -33,14 +33,16 @@ const Dashboard = () => {
     isError: false
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
     dispatchEvent({
       type: "EVENTS_FETCH_INIT"
     });
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     eventAPI
-      .findAll()
+      .findAll({ signal })
       .then(result => {
         dispatchEvent({
           type: "SET_EVENTS",
@@ -52,6 +54,10 @@ const Dashboard = () => {
           type: "EVENTS_FETCH_FAIL"
         });
       });
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, []);
 
   const handleToggle = () => {

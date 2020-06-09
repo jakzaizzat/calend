@@ -15,7 +15,7 @@ const Input = ({
       <div className="mb-3">
         <label
           htmlFor={id}
-          className="block text-sm font-medium leading-5 text-gray-700"
+          className="block text-sm font-medium leading-5 mb-2 text-gray-700"
         >
           {label}
         </label>

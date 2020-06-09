@@ -8,7 +8,23 @@ const events = [
     duration: 30,
     days: ["Monday, Tuesday"],
     timeStart: "09:00 A.M",
-    timeEnd: "03:00 P.M"
+    timeEnd: "03:00 P.M",
+    submissions: [
+      {
+        id: 1,
+        name: "Aizzat",
+        email: "jakzaizzat@gmail.com",
+        date: "Tue Jun 09 2020 11:41:48 GMT+0800 (Malaysia Time)",
+        timeslot: "2016-08-10 18:30"
+      },
+      {
+        id: 2,
+        name: "David",
+        email: "david@gmail.com",
+        date: "Tue Jun 09 2020 11:41:48 GMT+0800 (Malaysia Time)",
+        timeslot: "2016-08-10 18:30"
+      }
+    ]
   },
   {
     id: "5a13c83f-079a-44ec-ae22-ae8db461c11b",
@@ -29,5 +45,5 @@ export const findAll = () => {
 
 export function find(id) {
   const event = events.find(event => event.id === id);
-  return new Promise(resolve => setTimeout(() => resolve(event), 1500));
+  return new Promise(resolve => setTimeout(() => resolve(event), 0));
 }
