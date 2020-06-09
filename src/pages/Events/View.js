@@ -22,7 +22,7 @@ const EventView = () => {
         </div>
       ) : (
         <>
-          <nav className="bg-grey-light p-3 rounded font-sans w-full m-4">
+          <nav className="bg-grey-light py-3 rounded font-sans w-full my-4">
             <ol className="list-reset flex text-grey-dark">
               <li>
                 <Link to="/dashboard" className="text-blue font-bold">
@@ -88,6 +88,22 @@ const EventView = () => {
                     </dt>
                     <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                       {event.duration} minutes
+                    </dd>
+                  </div>
+                  <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm leading-5 font-medium text-gray-500">
+                      Date Interval
+                    </dt>
+                    <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                      12-03-2020 untill 12-06-2020
+                    </dd>
+                  </div>
+                  <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt className="text-sm leading-5 font-medium text-gray-500">
+                      Time Interval
+                    </dt>
+                    <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                      9:00 A.M - 05.00 P.M
                     </dd>
                   </div>
                 </dl>

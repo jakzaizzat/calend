@@ -20,19 +20,9 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="flex-shrink-0 text-white">Logo</div>
-            <div className="hidden sm:block sm:ml-6">
-              <div className="flex">
-                <Link
-                  to="/dashboard"
-                  className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
-                >
-                  Dashboard
-                </Link>
-              </div>
-            </div>
+            <div className="flex-shrink-0 text-white font-black">Calend</div>
           </div>
-          <div className="hidden sm:ml-6 sm:block">
+          <div className="ml-6 block">
             <div className="flex items-center">
               <div className="relative">
                 <div>

@@ -33,7 +33,7 @@ const Dashboard = () => {
     isError: false
   });
 
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatchEvent({
