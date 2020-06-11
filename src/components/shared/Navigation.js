@@ -4,7 +4,7 @@ import { UserContext } from "../../state/UserContext";
 import toast from "toasted-notes";
 
 const Navigation = () => {
-  const { setAuth } = useContext(UserContext);
+  const { auth, setAuth } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
 
