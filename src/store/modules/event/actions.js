@@ -1,15 +1,22 @@
-import { ADD_EVENT, FETCH_EVENTS } from "./action-types";
+import * as types from "./action-types";
 
 export function getEvents(response) {
   return {
-    type: FETCH_EVENTS,
-    response
+    type: types.FETCH_EVENTS,
+    response,
   };
 }
 
 export function addEvent(payload) {
   return {
-    type: ADD_EVENT,
-    payload
+    type: types.ADD_EVENT,
+    payload,
+  };
+}
+
+export function getEvent(response) {
+  return {
+    type: types.GET_EVENT,
+    response,
   };
 }

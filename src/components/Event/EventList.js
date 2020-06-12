@@ -36,13 +36,7 @@ const EventList = ({ isLoading, events }) => {
             ) : (
               <ul>
                 {events.map((event) => (
-                  <Event
-                    key={event.id}
-                    event={event}
-                    id={event.id}
-                    title={event.title}
-                    duration={event.duration}
-                  />
+                  <Event key={event.id} event={event} />
                 ))}
               </ul>
             )}

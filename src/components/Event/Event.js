@@ -8,7 +8,7 @@ const Event = ({ event }) => {
         <div className="px-4 py-4 sm:px-6">
           <div className="flex items-center justify-between">
             <div className="text-sm leading-5 font-medium text-indigo-600 truncate">
-              {event.title}
+              {event.name}
             </div>
             <div className="ml-2 flex-shrink-0 flex">
               <span

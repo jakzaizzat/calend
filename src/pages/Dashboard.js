@@ -9,21 +9,22 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false
+      isLoading: false,
     };
   }
   componentDidMount() {
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
     api
       .findAll()
-      .then(res => {
-        this.props.getEvents(res);
+      .then((res) => {
+        let events = JSON.parse(localStorage.getItem("events")) || [];
+        this.props.getEvents(events);
       })
       .finally(() => {
         this.setState({
-          isLoading: false
+          isLoading: false,
         });
       });
   }
@@ -31,10 +32,12 @@ class Dashboard extends Component {
   render() {
     return (
       <>
-        <EventList
-          events={this.props.eventState}
-          isLoading={this.state.isLoading}
-        />
+        {this.props.eventState.events ? (
+          <EventList
+            events={this.props.eventState.events}
+            isLoading={this.state.isLoading}
+          />
+        ) : null}
       </>
     );
   }

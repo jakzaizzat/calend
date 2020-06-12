@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { uuid } from "uuidv4";
 import toast from "toasted-notes";
+import moment from "moment";
 
 import BaseButton from "../shared/BaseButton";
 import ButtonGroups from "../shared/ButtonGroups";
@@ -24,6 +25,7 @@ const NewEvent = (props) => {
     dateTo: "",
     timeFrom: "",
     timeTo: "",
+    active: false,
   };
   const durations = [15, 30, 60];
 
@@ -38,6 +40,8 @@ const NewEvent = (props) => {
   };
 
   const handleButton = () => {
+    event.timeFrom = moment(event.timeFrom, "H:mm A");
+    event.timeTo = moment(event.timeTo, "H:mm A");
     event.id = uuid();
     let events = [];
     if (localStorage.getItem("events"))

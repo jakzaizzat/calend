@@ -18,11 +18,11 @@ const App = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setAuth(mock.user);
-      api.findAll().then((res) => {
-        let events = JSON.parse(localStorage.getItem("events")) || [];
-        console.log(events);
-        props.getEvents(events);
-      });
+      // api.findAll().then((res) => {
+      //   let events = JSON.parse(localStorage.getItem("events")) || [];
+      //   console.log(events);
+      //   props.getEvents(events);
+      // });
     }
   }, []);
 
