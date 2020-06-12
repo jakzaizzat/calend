@@ -1,51 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { uuid } from "uuidv4";
+import toast from "toasted-notes";
+
 import BaseButton from "../shared/BaseButton";
+import ButtonGroups from "../shared/ButtonGroups";
+import DatePicker from "react-pikaday-datepicker";
 import Input from "../shared/Input";
 import InputSelect from "../shared/InputSelect";
-import DatePicker from "react-pikaday-datepicker";
+import Textarea from "../shared/Textarea";
 
-const NewEvent = () => {
-  const handleInputChange = e => {
+import { useSemiPersistenceState } from "../../hook/useSemiPersistenceState";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addEvent } from "../../store/modules/event/actions";
+
+const NewEvent = (props) => {
+  const initialState = {
+    name: "",
+    link: "",
+    instruction: "",
+    duration: "",
+    dateFrom: "",
+    dateTo: "",
+    timeFrom: "",
+    timeTo: "",
+  };
+  const durations = [15, 30, 60];
+
+  const [event, setEvent] = useSemiPersistenceState("event", initialState);
+
+  const handleInputChange = (e) => {
     e.persist();
     setEvent({
       ...event,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleButton = () => {
-    // TODO: Integrate with REST
-    console.log(event);
-  };
-  const useSemiPersistenceState = (key, initialState) => {
-    const [event, setEvent] = useState(
-      JSON.parse(localStorage.getItem(key)) || initialState
-    );
+    event.id = uuid();
+    let events = [];
+    if (localStorage.getItem("events"))
+      events = JSON.parse(localStorage.getItem("events"));
 
-    useEffect(
-      key => {
-        localStorage.setItem(key, JSON.stringify(event));
-      },
-      [event]
-    );
+    events.push(event);
+    localStorage.setItem("events", JSON.stringify(events));
 
-    return [event, setEvent];
+    props.addEvent(event);
+
+    toast.notify("Event created 🎉");
+    setEvent(initialState);
+    props.onClose();
   };
-  const eventTypes = [
-    {
-      id: 1,
-      value: "One to One"
-    },
-    {
-      id: 2,
-      value: "Many to many"
-    }
-  ];
-  const [event, setEvent] = useSemiPersistenceState("event", {
-    name: "",
-    link: "",
-    type: ""
-  });
 
   return (
     <div>
@@ -65,41 +71,29 @@ const NewEvent = () => {
         placeholder="http://google.com"
       />
 
-      <div className="mb-3">
-        <label className="block text-sm font-medium leading-5 mb-2 text-gray-700">
-          Instructions
-        </label>
-        <textarea
-          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-          cols="3"
-          rows="5"
-        ></textarea>
-      </div>
+      <Textarea
+        label="Instructions"
+        id="instruction"
+        value={event.instruction}
+        onChange={handleInputChange}
+      ></Textarea>
 
       <div className="mb-3">
         <label className="block text-sm font-medium leading-5 mb-2 text-gray-700">
           Event duration
         </label>
-        <span className="relative z-0 inline-flex shadow-sm">
-          <button
-            type="button"
-            className="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-          >
-            60 minutes
-          </button>
-          <button
-            type="button"
-            className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-          >
-            30 minutes
-          </button>
-          <button
-            type="button"
-            className="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-          >
-            15 minutes
-          </button>
-        </span>
+        <ButtonGroups
+          durations={durations}
+          active={event.duration}
+          handleChanges={(duration) => {
+            setEvent((event) => {
+              return {
+                ...event,
+                duration: duration,
+              };
+            });
+          }}
+        ></ButtonGroups>
       </div>
 
       <div className="mb-3">
@@ -108,22 +102,39 @@ const NewEvent = () => {
         </label>
         <div className="flex items-center -mx-2">
           <div className="w-1/2 px-2">
-          <DatePicker
+            <DatePicker
               placeholder="From"
               format="YYYY/MM/DD"
               className="form-input w-full text-sm"
-          />
+              name="dateFrom"
+              onChange={(date) => {
+                setEvent((event) => {
+                  return {
+                    ...event,
+                    dateFrom: date,
+                  };
+                });
+              }}
+            />
           </div>
 
           <div className="w-1/2 px-2">
             <DatePicker
-                placeholder="End"
-                format="YYYY/MM/DD"
-                className="form-input w-full text-sm"
+              placeholder="End"
+              format="YYYY/MM/DD"
+              className="form-input w-full text-sm"
+              name="dateTo"
+              onChange={(date) => {
+                setEvent((event) => {
+                  return {
+                    ...event,
+                    dateTo: date,
+                  };
+                });
+              }}
             />
           </div>
         </div>
-
       </div>
 
       <div>
@@ -132,14 +143,23 @@ const NewEvent = () => {
         </label>
         <div className="flex items-center -mx-2">
           <div className="w-1/2 px-2">
-            <Input type="time"/>
+            <Input
+              id="timeFrom"
+              type="time"
+              value={event.timeFrom}
+              onChange={handleInputChange}
+            />
           </div>
 
           <div className="w-1/2 px-2">
-            <Input type="time"/>
+            <Input
+              id="timeTo"
+              type="time"
+              value={event.timeTo}
+              onChange={handleInputChange}
+            />
           </div>
         </div>
-
       </div>
 
       <div className="mt-8">
@@ -149,4 +169,8 @@ const NewEvent = () => {
   );
 };
 
-export default NewEvent;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ addEvent }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(NewEvent);

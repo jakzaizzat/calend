@@ -1,87 +1,51 @@
-import React, { useEffect, useReducer, useState } from "react";
-import EventList from "../components/Event/EventList";
-import Modal from "../components/shared/Modal";
-import NewEvent from "../components/Event/NewEvent";
-import * as eventAPI from "../api/events-api-mock";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getEvents } from "../store/modules/event/actions";
+import EventList from "../../src/components/Event/EventList";
+import * as api from "../api/events-api-mock";
 
-const eventReducer = (state, action) => {
-  switch (action.type) {
-    case "EVENTS_FETCH_INIT":
-      return { ...state, isLoading: true, isError: false };
-    case "SET_EVENTS":
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        data: action.payload
-      };
-    case "EVENTS_FETCH_FAIL":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true
-      };
-    default:
-      throw new Error();
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false
+    };
   }
-};
-
-const Dashboard = () => {
-  const [events, dispatchEvent] = useReducer(eventReducer, {
-    data: [],
-    isLoading: false,
-    isError: false
-  });
-
-  const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    dispatchEvent({
-      type: "EVENTS_FETCH_INIT"
+  componentDidMount() {
+    this.setState({
+      isLoading: true
     });
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    eventAPI
-      .findAll({ signal })
-      .then(result => {
-        dispatchEvent({
-          type: "SET_EVENTS",
-          payload: result
-        });
+    api
+      .findAll()
+      .then(res => {
+        this.props.getEvents(res);
       })
-      .catch(() => {
-        dispatchEvent({
-          type: "EVENTS_FETCH_FAIL"
+      .finally(() => {
+        this.setState({
+          isLoading: false
         });
       });
+  }
 
-    return function cleanup() {
-      abortController.abort();
-    };
-  }, []);
-
-  const handleToggle = () => {
-    setShowModal(!showModal);
-  };
-
-  return (
-    <div>
-      {showModal ? (
-        <Modal title="Add new event" onClose={handleToggle}>
-          <NewEvent />
-        </Modal>
-      ) : null}
-      {events.isError ? (
-        <p>Something when wrong</p>
-      ) : (
+  render() {
+    return (
+      <>
         <EventList
-          events={events.data}
-          isLoading={events.isLoading}
-          onCreateModal={handleToggle}
+          events={this.props.eventState}
+          isLoading={this.state.isLoading}
         />
-      )}
-    </div>
-  );
-};
+      </>
+    );
+  }
+}
 
-export default Dashboard;
+function mapStateToProps({ eventState }) {
+  return { eventState };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getEvents }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
