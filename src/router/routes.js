@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import EventView from "../pages/Events/View";
@@ -31,7 +31,7 @@ const AuthRoute = ({ children, ...rest }) => (
         <Redirect
           to={{
             pathname: "/",
-            state: { from: location }
+            state: { from: location },
           }}
         />
       )
@@ -43,21 +43,11 @@ const Routes = () => {
   return (
     <Router>
       <Switch>
-        <AuthRoute path="/dashboard">
-          <Dashboard />
-        </AuthRoute>
-        <AuthRoute path="/event/:id">
-          <EventView />
-        </AuthRoute>
-        <Route path="/booking/:id">
-          <BookingView />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <Route path="/">
-          <Login />
-        </Route>
+        <AuthRoute path="/dashboard" component={Dashboard} />
+        <AuthRoute path="/event/:id" component={EventView} />
+        <Route path="/home" component={Home} />
+        <Route path="/booking/:id" component={BookingView} />
+        <Route path="/" component={Login} />
       </Switch>
     </Router>
   );

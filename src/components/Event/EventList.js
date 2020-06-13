@@ -30,7 +30,7 @@ const EventList = ({ isLoading, events }) => {
             }
           >
             {isLoading ? (
-              <div className="my-3">
+              <div className="my-5">
                 <Loading color="#333333" />
               </div>
             ) : (

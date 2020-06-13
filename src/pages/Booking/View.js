@@ -80,9 +80,11 @@ const BookingView = () => {
               <div className="max-w-2xl mx-auto">
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                   <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <p className="mb-1 text-sm">Instructions</p>
                     <div className="whitespace-pre-wrap text-gray-500  text-sm mb-4">
                       {event.instruction}
                     </div>
+                    <p className="mb-1 text-sm">Durations</p>
                     <p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
                       {event.duration} minutes
                     </p>
