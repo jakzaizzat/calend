@@ -25,9 +25,9 @@ const BookingView = () => {
   const [date, setDate] = useState(null);
   const [timeslot, setTimeslot] = useState("");
   const [intervalOptions, setIntervalOptions] = useState([]);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
     let payload = {
       ...data,
       date,
@@ -36,9 +36,9 @@ const BookingView = () => {
     let events = JSON.parse(localStorage.getItem("events")) || [];
     let index = events.findIndex((event) => event.id === id);
     events[index].submissions.push(payload);
-    console.log(events);
     localStorage.setItem("events", JSON.stringify(events));
     toast.notify("Submission created 🎉");
+    reset({});
   };
 
   let minDate = new Date();
@@ -47,19 +47,28 @@ const BookingView = () => {
   let maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 14);
 
+  const calculateInterval = (from, to, duration) => {
+    let results = intervals(from, to, duration);
+    return results.map((result) => {
+      return {
+        id: uuid(),
+        value: result,
+      };
+    });
+  };
+
   useEffect(() => {
     setDate(new Date());
 
     const events = JSON.parse(localStorage.getItem("events")) || [];
     const event = events.find((event) => event.id === id);
     setEvent(event);
-    let results = intervals(event.timeFrom, event.timeTo, event.duration);
-    results = results.map((result) => {
-      return {
-        id: uuid(),
-        value: result,
-      };
-    });
+
+    let results = calculateInterval(
+      event.timeFrom,
+      event.timeTo,
+      event.duration
+    );
 
     setIntervalOptions(results);
     setTimeslot(results[0].value);
@@ -118,7 +127,6 @@ const BookingView = () => {
                             ref={register}
                             onChange={(e) => {
                               e.persist();
-                              console.log(e.target.value);
                               setTimeslot(e.target.value);
                             }}
                           />

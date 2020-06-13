@@ -11,6 +11,7 @@ import Routes from "./router/routes";
 
 import "toasted-notes/src/styles.css";
 import "./App.css";
+import { eventsData } from "../src/api/demo";
 
 const App = (props) => {
   const [auth, setAuth] = useState(null);
@@ -18,6 +19,9 @@ const App = (props) => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setAuth(mock.user);
+    }
+    if (!localStorage.getItem("events")) {
+      localStorage.setItem("events", JSON.stringify(eventsData));
     }
   }, []);
 

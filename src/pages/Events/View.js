@@ -27,20 +27,20 @@ class EventView extends Component {
           </div>
         ) : (
           <>
-            <nav className="bg-grey-light py-3 rounded font-sans w-full my-4">
-              <ol className="list-reset flex text-grey-dark">
-                <li>
-                  <Link to="/dashboard" className="text-blue font-bold">
-                    Events
-                  </Link>
-                </li>
-                <li>
-                  <span className="mx-2">/</span>
-                </li>
-                <li className="capitalize">{event.name}</li>
-              </ol>
-            </nav>
             <div className="max-w-2xl mx-auto mb-4">
+              <nav className="bg-grey-light py-3 rounded font-sans w-full my-4">
+                <ol className="list-reset flex text-grey-dark">
+                  <li>
+                    <Link to="/dashboard" className="text-blue font-bold">
+                      Events
+                    </Link>
+                  </li>
+                  <li>
+                    <span className="mx-2">/</span>
+                  </li>
+                  <li className="capitalize">{event.name}</li>
+                </ol>
+              </nav>
               <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                 <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
                   <h3 className="text-lg leading-6 font-medium text-gray-900 capitalize mb-2">
@@ -88,10 +88,27 @@ class EventView extends Component {
                       <dd className="mt-1 flex items-center text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <a
                           href={event.link}
-                          className="text-indigo-700"
+                          className="flex items-center text-indigo-700"
                           target="_blank"
                         >
                           {event.link}
+
+                          <svg
+                            className="h-4 w-4 ml-1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#4c51bf"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <g fill="none" fill-rule="evenodd">
+                              <path d="M18 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h5M15 3h6v6M10 14L20.2 3.8" />
+                            </g>
+                          </svg>
                         </a>
                       </dd>
                     </div>
