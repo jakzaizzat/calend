@@ -12,7 +12,10 @@ const eventReducer = (state = initialState, action) => {
         events: action.response,
       };
     case types.ADD_EVENT:
-      return state.concat(action.payload);
+      return {
+        ...state,
+        events: state.events.concat(action.payload),
+      };
     case types.GET_EVENT:
       return {
         ...state,

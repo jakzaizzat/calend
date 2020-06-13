@@ -25,8 +25,12 @@ const NewEvent = (props) => {
     dateTo: "",
     timeFrom: "",
     timeTo: "",
-    active: false,
+    active: true,
+    submissions: [],
   };
+
+  let minDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
   const durations = [15, 30, 60];
 
   const [event, setEvent] = useSemiPersistenceState("event", initialState);
@@ -111,6 +115,7 @@ const NewEvent = (props) => {
               format="YYYY/MM/DD"
               className="form-input w-full text-sm"
               name="dateFrom"
+              minDate={minDate}
               onChange={(date) => {
                 setEvent((event) => {
                   return {
@@ -128,6 +133,7 @@ const NewEvent = (props) => {
               format="YYYY/MM/DD"
               className="form-input w-full text-sm"
               name="dateTo"
+              minDate={minDate}
               onChange={(date) => {
                 setEvent((event) => {
                   return {

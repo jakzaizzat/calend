@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import * as eventAPI from "../../api/events-api-mock";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import styled from "styled-components";
 import Input from "../../components/shared/Input";
 import { intervals } from "../../utils/getTimeSlot";
 import { uuid } from "uuidv4";
+import toast from "toasted-notes";
 
 const CardContainer = styled.div`
   width: 500px;
@@ -26,13 +27,18 @@ const BookingView = () => {
   const [intervalOptions, setIntervalOptions] = useState([]);
   const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     let payload = {
       ...data,
       date,
-      timeslot
+      timeslot,
     };
-    console.log(payload);
+    let events = JSON.parse(localStorage.getItem("events")) || [];
+    let index = events.findIndex((event) => event.id === id);
+    events[index].submissions.push(payload);
+    console.log(events);
+    localStorage.setItem("events", JSON.stringify(events));
+    toast.notify("Submission created 🎉");
   };
 
   let minDate = new Date();
@@ -43,26 +49,23 @@ const BookingView = () => {
 
   useEffect(() => {
     setDate(new Date());
-    eventAPI.find(id).then(res => {
-      setEvent(res);
-      let results = intervals(
-        "2016-08-10 4:35:00 PM",
-        "2016-08-10 8:06:00 PM",
-        res.duration
-      );
-      results = results.map(result => {
-        return {
-          id: uuid(),
-          value: result
-        };
-      });
-      setIntervalOptions(results);
-      setTimeslot(results[2].value);
+
+    const events = JSON.parse(localStorage.getItem("events")) || [];
+    const event = events.find((event) => event.id === id);
+    setEvent(event);
+    let results = intervals(event.timeFrom, event.timeTo, event.duration);
+    results = results.map((result) => {
+      return {
+        id: uuid(),
+        value: result,
+      };
     });
+
+    setIntervalOptions(results);
+    setTimeslot(results[0].value);
   }, []);
 
-  const onDateChange = date => {
-    console.log(date);
+  const onDateChange = (date) => {
     setDate(date);
   };
 
@@ -72,13 +75,16 @@ const BookingView = () => {
         "none"
       ) : (
         <CardContainer>
-          <Card title={event.title}>
+          <Card title={event.name}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="max-w-2xl mx-auto">
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                   <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
+                    <div className="whitespace-pre-wrap text-gray-500  text-sm mb-4">
+                      {event.instruction}
+                    </div>
                     <p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
-                      {event.description} - {event.duration} minutes
+                      {event.duration} minutes
                     </p>
                   </div>
                   <div className="py-4">
@@ -108,7 +114,7 @@ const BookingView = () => {
                             value={timeslot}
                             options={intervalOptions}
                             ref={register}
-                            onChange={e => {
+                            onChange={(e) => {
                               e.persist();
                               console.log(e.target.value);
                               setTimeslot(e.target.value);
@@ -144,8 +150,8 @@ const BookingView = () => {
                             register={register({
                               required: true,
                               pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-                              }
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                              },
                             })}
                           />
                           {errors.email && (
