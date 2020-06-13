@@ -1,23 +1,19 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 import { UserContext } from "../../state/UserContext";
 import toast from "toasted-notes";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const { auth, setAuth } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
 
   let history = useHistory();
   const handleLogout = () => {
-    try {
-      setAuth(null);
-      localStorage.removeItem("token");
-      setShowMenu(false);
-      toast.notify("Successfully logout");
-      history.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    setAuth(null);
+    localStorage.removeItem("token");
+    setShowMenu(false);
+    toast.notify("Successfully logout");
+    history.push("/dashboard");
   };
   return (
     <nav className="bg-gray-800">

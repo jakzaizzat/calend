@@ -7,6 +7,7 @@ import { getEvents } from "./store/modules/event/actions";
 import * as api from "./api/events-api-mock";
 
 import mock from "./config/mock";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./router/routes";
 
 import "toasted-notes/src/styles.css";
@@ -28,10 +29,10 @@ const App = () => {
   return (
     <div className="App bg-gray-200 min-h-screen">
       <UserContext.Provider value={providerAuth}>
-        <div>
+        <BrowserRouter>
           {auth ? <Navigation /> : null}
           <Routes />
-        </div>
+        </BrowserRouter>
       </UserContext.Provider>
     </div>
   );

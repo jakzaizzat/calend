@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import EventView from "../pages/Events/View";
 import BookingView from "../pages/Booking/View";
@@ -33,15 +33,13 @@ const AuthRoute = ({ component: Component, ...rest }) => (
 
 const Routes = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <AuthRoute path="/dashboard" component={Dashboard} />
-        <AuthRoute path="/event/:id" component={EventView} />
-        <AuthRoute exact path="/home" component={Home} />
-        <Route path="/booking/:id" component={BookingView} />
-        <Route path="/" component={Login} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <AuthRoute path="/dashboard" component={Dashboard} />
+      <AuthRoute path="/event/:id" component={EventView} />
+      <AuthRoute exact path="/home" component={Home} />
+      <Route path="/booking/:id" component={BookingView} />
+      <Route path="/" component={Login} />
+    </Switch>
   );
 };
 
