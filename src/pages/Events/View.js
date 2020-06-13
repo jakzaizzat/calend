@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef } from "react";
 import { useParams, Link, withRouter } from "react-router-dom";
 import Moment from "react-moment";
 import * as eventAPI from "../../api/events-api-mock";
@@ -7,8 +7,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEvent } from "../../store/modules/event/actions";
 import Submissions from "../../components/Event/Submissions";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import toast from "toasted-notes";
 
 class EventView extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
     const events = JSON.parse(localStorage.getItem("events")) || [];
@@ -75,10 +81,42 @@ class EventView extends Component {
                       <dd className="mt-1 flex items-center text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <Link
                           to={"/booking/" + event.id}
-                          className="text-indigo-700 mr-3"
+                          className="text-indigo-700 mr-1"
+                          id="meeting-link"
                         >
                           {window.location.origin}/booking/{event.id}
                         </Link>
+                        <CopyToClipboard
+                          text={window.location.origin + "/booking/" + event.id}
+                          onCopy={() => {
+                            toast.notify("Link copied");
+                          }}
+                        >
+                          <button>
+                            <svg
+                              className="h-4 w-4 ml-1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="#4c51bf"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <rect
+                                x="9"
+                                y="9"
+                                width="13"
+                                height="13"
+                                rx="2"
+                                ry="2"
+                              ></rect>
+                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                          </button>
+                        </CopyToClipboard>
                       </dd>
                     </div>
                     <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
