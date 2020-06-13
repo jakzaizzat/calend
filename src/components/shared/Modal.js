@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
 const Overlay = styled.div`
@@ -9,16 +9,30 @@ const Card = styled.div`
   width: 500px;
 `;
 
-const Modal = props => {
-  const handleClose = () => {
-    props.onClose();
+const Modal = (props) => {
+  const node = useRef();
+
+  const handleClose = (e) => {
+    if (e.target.id === "modal") {
+      props.onClose();
+      return;
+    }
   };
+
   return (
-    <Overlay className="fixed top-0 right-0 bottom-0 left-0 z-50 flex items-center justify-center">
+    <Overlay
+      id="modal"
+      onClick={handleClose}
+      className="fixed top-0 right-0 bottom-0 left-0 z-50 flex items-center justify-center"
+    >
       <Card className="bg-white p-2 shadow rounded  w-1/2">
         <div className="flex items-center justify-between p-3 font-semibold text-gray-800">
           <span>{props.title}</span>
-          <button onClick={handleClose}>
+          <button
+            onClick={() => {
+              props.onClose();
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
