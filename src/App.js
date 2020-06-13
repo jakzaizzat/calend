@@ -30,7 +30,6 @@ const App = () => {
     <div className="App bg-gray-200 min-h-screen">
       <UserContext.Provider value={providerAuth}>
         <BrowserRouter>
-          {auth ? <Navigation /> : null}
           <Routes />
         </BrowserRouter>
       </UserContext.Provider>

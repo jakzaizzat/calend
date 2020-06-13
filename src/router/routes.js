@@ -6,6 +6,7 @@ import BookingView from "../pages/Booking/View";
 import Login from "../pages/Login";
 import mock from "../config/mock";
 import Home from "../pages/Home";
+import DashboardLayout from "../pages/layouts/Dashboard";
 
 const checkAuth = () => {
   const token = localStorage.getItem("token");
@@ -21,9 +22,9 @@ const AuthRoute = ({ component: Component, ...rest }) => (
     {...rest}
     render={(props) =>
       checkAuth() ? (
-        <div className="py-0 px-4 haha">
+        <DashboardLayout>
           <Component />
-        </div>
+        </DashboardLayout>
       ) : (
         <Redirect to="/" />
       )
