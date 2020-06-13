@@ -11,20 +11,21 @@ const Login = () => {
 
   const [user, setUser] = useState({
     username: "admin",
-    password: "admin"
+    password: "admin",
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     e.persist();
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   let history = useHistory();
+
   const handleSubmit = async () => {
     setIsLoading(true);
     try {

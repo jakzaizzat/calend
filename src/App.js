@@ -13,7 +13,7 @@ import "toasted-notes/src/styles.css";
 import "./App.css";
 import { eventsData } from "../src/api/demo";
 
-const App = (props) => {
+const App = () => {
   const [auth, setAuth] = useState(null);
   const providerAuth = useMemo(() => ({ auth, setAuth }), [auth, setAuth]);
   useEffect(() => {

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import EventView from "../pages/Events/View";
 import BookingView from "../pages/Booking/View";
@@ -21,19 +16,16 @@ const checkAuth = () => {
   return true;
 };
 
-const AuthRoute = ({ children, ...rest }) => (
+const AuthRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={({ location }) =>
+    render={(props) =>
       checkAuth() ? (
-        <div className="py-0 px-4">{children}</div>
+        <div className="py-0 px-4 haha">
+          <Component />
+        </div>
       ) : (
-        <Redirect
-          to={{
-            pathname: "/",
-            state: { from: location },
-          }}
-        />
+        <Redirect to="/" />
       )
     }
   />
@@ -41,15 +33,15 @@ const AuthRoute = ({ children, ...rest }) => (
 
 const Routes = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
         <AuthRoute path="/dashboard" component={Dashboard} />
         <AuthRoute path="/event/:id" component={EventView} />
-        <Route path="/home" component={Home} />
+        <AuthRoute exact path="/home" component={Home} />
         <Route path="/booking/:id" component={BookingView} />
         <Route path="/" component={Login} />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 };
 
