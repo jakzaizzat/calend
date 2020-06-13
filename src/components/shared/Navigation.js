@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory, withRouter, Link } from "react-router-dom";
 import { UserContext } from "../../state/UserContext";
 import toast from "toasted-notes";
 
@@ -20,12 +20,12 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <a
-              href="/dashboard"
+            <Link
+              to="/dashboard"
               className="flex-shrink-0 text-white font-black"
             >
               Calend
-            </a>
+            </Link>
           </div>
           <div className="ml-6 block">
             <div className="flex items-center">

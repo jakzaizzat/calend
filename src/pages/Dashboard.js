@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getEvents } from "../store/modules/event/actions";
 import EventList from "../../src/components/Event/EventList";
+import withLoading from "../components/shared/withLoading";
 import * as api from "../api/events-api-mock";
 
 class Dashboard extends Component {
@@ -30,10 +31,11 @@ class Dashboard extends Component {
   }
 
   render() {
+    const EventListWithLoading = withLoading(EventList);
     return (
       <>
         {this.props.eventState.events ? (
-          <EventList
+          <EventListWithLoading
             events={this.props.eventState.events}
             isLoading={this.state.isLoading}
           />

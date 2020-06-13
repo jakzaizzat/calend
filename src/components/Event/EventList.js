@@ -6,7 +6,7 @@ import Loading from "../shared/Loading";
 import Modal from "../shared/Modal";
 import NewEvent from "./NewEvent";
 
-const EventList = ({ isLoading, events }) => {
+const EventList = ({ events }) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -29,16 +29,14 @@ const EventList = ({ isLoading, events }) => {
               </BaseButton>
             }
           >
-            {isLoading ? (
-              <div className="my-5">
-                <Loading color="#333333" />
-              </div>
-            ) : (
+            {events.length > 0 ? (
               <ul>
                 {events.map((event) => (
                   <Event key={event.id} event={event} />
                 ))}
               </ul>
+            ) : (
+              <p className="my-3 text-center">There is no events</p>
             )}
           </Card>
         </div>
