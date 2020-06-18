@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Overlay = styled.div`
@@ -10,8 +10,6 @@ const Card = styled.div`
 `;
 
 const Modal = (props) => {
-  const node = useRef();
-
   const handleClose = (e) => {
     if (e.target.id === "modal") {
       props.onClose();

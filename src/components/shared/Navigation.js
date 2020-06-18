@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { useHistory, withRouter, Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { UserContext } from "../../state/UserContext";
 import toast from "toasted-notes";
 
 const Navigation = () => {
-  const { auth, setAuth } = useContext(UserContext);
+  const { setAuth } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
 
   let history = useHistory();

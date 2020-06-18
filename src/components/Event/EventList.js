@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Card from "../shared/Card";
 import BaseButton from "../shared/BaseButton";
 import Event from "./Event";
-import Loading from "../shared/Loading";
 import Modal from "../shared/Modal";
 import NewEvent from "./NewEvent";
 

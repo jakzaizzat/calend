@@ -67,7 +67,11 @@ const Login = () => {
             />
 
             <div className="mt-6">
-              <BaseButton onClick={handleSubmit} isLoading={isLoading}>
+              <BaseButton
+                fullwidth
+                onClick={handleSubmit}
+                isLoading={isLoading}
+              >
                 Sign in
               </BaseButton>
             </div>

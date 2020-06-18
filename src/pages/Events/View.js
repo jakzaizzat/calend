@@ -1,7 +1,6 @@
-import React, { Component, useRef } from "react";
-import { useParams, Link, withRouter } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import Moment from "react-moment";
-import * as eventAPI from "../../api/events-api-mock";
 import Loading from "../../components/shared/Loading";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,10 +10,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import toast from "toasted-notes";
 
 class EventView extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const id = this.props.match.params.id;
     const events = JSON.parse(localStorage.getItem("events")) || [];
@@ -80,11 +75,11 @@ class EventView extends Component {
                       </dt>
                       <dd className="mt-1 flex items-center text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                         <Link
-                          to={"/booking/" + event.id}
+                          to={"/book/" + event.id}
                           className="text-indigo-700 mr-1"
                           id="meeting-link"
                         >
-                          {window.location.origin}/booking/{event.id}
+                          {window.location.origin}/book/{event.id}
                         </Link>
                         <CopyToClipboard
                           text={window.location.origin + "/booking/" + event.id}
@@ -128,6 +123,7 @@ class EventView extends Component {
                           href={event.link}
                           className="flex items-center text-indigo-700"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           {event.link}
 

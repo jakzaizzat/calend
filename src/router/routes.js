@@ -7,6 +7,7 @@ import BookingView from "../pages/Booking/View";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import AuthRoute from "./auth";
+import Book from "../pages/Booking/Book";
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       <AuthRoute path="/event/:id" component={EventView} />
       <AuthRoute exact path="/home" component={Home} />
       <Route path="/booking/:id" component={BookingView} />
+      <Route path="/book/:id" component={Book} />
       <Route path="/" component={Login} />
     </Switch>
   );

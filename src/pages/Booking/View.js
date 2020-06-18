@@ -1,5 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
-import * as eventAPI from "../../api/events-api-mock";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -72,7 +71,7 @@ const BookingView = () => {
 
     setIntervalOptions(results);
     setTimeslot(results[0].value);
-  }, []);
+  }, [id]);
 
   const onDateChange = (date) => {
     setDate(date);
