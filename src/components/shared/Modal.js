@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
 
 const Overlay = styled.div`
@@ -9,6 +10,8 @@ const Card = styled.div`
   width: 500px;
 `;
 
+const portal = document.getElementById("portal");
+
 const Modal = (props) => {
   const handleClose = (e) => {
     if (e.target.id === "modal") {
@@ -17,7 +20,7 @@ const Modal = (props) => {
     }
   };
 
-  return (
+  return ReactDOM.createPortal(
     <Overlay
       id="modal"
       onClick={handleClose}
@@ -46,7 +49,8 @@ const Modal = (props) => {
         </div>
         <div className="body p-3">{props.children}</div>
       </Card>
-    </Overlay>
+    </Overlay>,
+    portal
   );
 };
 
