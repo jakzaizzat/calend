@@ -8,7 +8,6 @@ const ButtonGroups = ({ active, durations, ...props }) => {
           key={duration}
           type="button"
           onClick={() => {
-            console.log(duration);
             props.handleChanges(duration);
           }}
           className={` ${

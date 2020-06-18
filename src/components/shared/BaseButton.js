@@ -8,6 +8,7 @@ const BaseButton = ({ isLoading, fullwidth, children, ...props }) => {
   return (
     <span className="block rounded-md shadow-sm">
       <button
+        data-testid="button"
         onClick={eventHandler}
         type="button"
         className={` ${
