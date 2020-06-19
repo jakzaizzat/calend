@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ButtonGroups = ({ active, durations, ...props }) => {
   return (
@@ -21,6 +22,11 @@ const ButtonGroups = ({ active, durations, ...props }) => {
       ))}
     </span>
   );
+};
+
+ButtonGroups.propTypes = {
+  active: PropTypes.string,
+  durations: PropTypes.array.isRequired,
 };
 
 export default ButtonGroups;

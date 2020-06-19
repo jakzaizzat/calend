@@ -4,6 +4,7 @@ import BaseButton from "../shared/BaseButton";
 import Event from "./Event";
 import Modal from "../shared/Modal";
 import NewEvent from "./NewEvent";
+import PropTypes from "prop-types";
 
 const EventList = ({ events }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -41,6 +42,10 @@ const EventList = ({ events }) => {
       </div>
     </>
   );
+};
+
+EventList.propTypes = {
+  events: PropTypes.array.isRequired,
 };
 
 export default EventList;

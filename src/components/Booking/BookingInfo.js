@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
+import PropTypes from "prop-types";
 
 const BookingInfo = ({ activeTime, event, selectedDate }) => {
   return (
@@ -56,6 +57,10 @@ const BookingInfo = ({ activeTime, event, selectedDate }) => {
       ) : null}
     </>
   );
+};
+
+BookingInfo.propTypes = {
+  event: PropTypes.object.isRequired,
 };
 
 export default BookingInfo;

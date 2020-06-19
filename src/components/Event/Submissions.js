@@ -1,7 +1,8 @@
 import React from "react";
 import Moment from "react-moment";
+import PropTypes from "prop-types";
 
-const Submissions = ({ submissions }) => {
+const Submissions = ({ submissions = [] }) => {
   return (
     <div className="max-w-2xl mx-auto mb-4">
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -44,6 +45,10 @@ const Submissions = ({ submissions }) => {
       </div>
     </div>
   );
+};
+
+Submissions.propTypes = {
+  submissions: PropTypes.array.isRequired,
 };
 
 export default Submissions;

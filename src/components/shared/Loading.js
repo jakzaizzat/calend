@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Container = styled.div`
   display: flex;
@@ -69,6 +70,10 @@ const Loading = ({ color = "#ffffff" }) => {
       </svg>
     </Container>
   );
+};
+
+Loading.propTypes = {
+  color: PropTypes.string.isRequired,
 };
 
 export default Loading;

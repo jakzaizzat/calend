@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Event = ({ event }) => {
   return (
@@ -49,6 +50,10 @@ const Event = ({ event }) => {
       </span>
     </Link>
   );
+};
+
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
 };
 
 export default Event;

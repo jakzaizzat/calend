@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
 
 const InputSelect = forwardRef(
   ({ label, id, onChange, value, options = [], register }, ref) => {
@@ -13,7 +14,7 @@ const InputSelect = forwardRef(
           className="form-select focus:outline-none focus:shadow-outline-blue text-sm mt-1 block w-full"
           onChange={onChange}
         >
-          {options.map(option => (
+          {options.map((option) => (
             <option key={option.id} value={option.value}>
               {option.value}
             </option>
@@ -24,5 +25,11 @@ const InputSelect = forwardRef(
     );
   }
 );
+
+InputSelect.propTypes = {
+  label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+};
 
 export default InputSelect;

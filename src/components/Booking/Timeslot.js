@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Timeslot = ({ activeDate, time, ...props }) => {
   const [active, setActive] = useState(false);
@@ -36,6 +37,10 @@ const Timeslot = ({ activeDate, time, ...props }) => {
       </div>
     </>
   );
+};
+
+Timeslot.propTypes = {
+  time: PropTypes.object.isRequired,
 };
 
 export default Timeslot;

@@ -1,5 +1,6 @@
 import React from "react";
 import Loading from "./Loading";
+import PropTypes from "prop-types";
 
 const BaseButton = ({ isLoading, fullwidth, children, ...props }) => {
   const eventHandler = () => {
@@ -25,6 +26,11 @@ const BaseButton = ({ isLoading, fullwidth, children, ...props }) => {
       </button>
     </span>
   );
+};
+
+BaseButton.propTypes = {
+  isLoading: PropTypes.bool,
+  fullwidth: PropTypes.bool,
 };
 
 export default BaseButton;

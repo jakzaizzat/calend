@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
+import PropTypes from "prop-types";
+
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
@@ -12,10 +14,10 @@ const Card = styled.div`
 
 const portal = document.getElementById("portal");
 
-const Modal = (props) => {
+const Modal = ({ title, children, onClose }) => {
   const handleClose = (e) => {
     if (e.target.id === "modal") {
-      props.onClose();
+      onClose();
       return;
     }
   };
@@ -28,10 +30,10 @@ const Modal = (props) => {
     >
       <Card className="bg-white p-2 shadow rounded  w-1/2">
         <div className="flex items-center justify-between p-3 font-semibold text-gray-800">
-          <span>{props.title}</span>
+          <span>{title}</span>
           <button
             onClick={() => {
-              props.onClose();
+              onClose();
             }}
           >
             <svg
@@ -47,11 +49,15 @@ const Modal = (props) => {
             </svg>
           </button>
         </div>
-        <div className="body p-3">{props.children}</div>
+        <div className="body p-3">{children}</div>
       </Card>
     </Overlay>,
     portal
   );
+};
+
+Modal.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default Modal;

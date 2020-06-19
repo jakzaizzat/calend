@@ -3,6 +3,7 @@ import BaseButton from "../shared/BaseButton";
 import Input from "../shared/Input";
 import { useForm } from "react-hook-form";
 import toast from "toasted-notes";
+import PropTypes from "prop-types";
 
 const BookingForm = ({ id, date, timeslot }) => {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -63,6 +64,12 @@ const BookingForm = ({ id, date, timeslot }) => {
       </dl>
     </div>
   );
+};
+
+BookingForm.propTypes = {
+  id: PropTypes.string.isRequired,
+  date: PropTypes.object.isRequired,
+  timeslot: PropTypes.string.isRequired,
 };
 
 export default BookingForm;

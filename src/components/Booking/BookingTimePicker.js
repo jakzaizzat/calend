@@ -3,6 +3,7 @@ import Calendar from "./Calendar";
 import Moment from "react-moment";
 import Timeslot from "./Timeslot";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const TimeScrollContainer = styled.div`
   height: 500px;
@@ -48,6 +49,10 @@ const BookingTimePicker = ({
       </div>
     </>
   );
+};
+
+BookingTimePicker.propTypes = {
+  intervalOptions: PropTypes.array.isRequired,
 };
 
 export default BookingTimePicker;

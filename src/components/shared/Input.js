@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Input = ({
   id,
@@ -8,7 +9,7 @@ const Input = ({
   placeholder,
   onChange,
   register,
-  required
+  required,
 }) => {
   return (
     <>
@@ -35,6 +36,10 @@ const Input = ({
       </div>
     </>
   );
+};
+
+Input.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default Input;

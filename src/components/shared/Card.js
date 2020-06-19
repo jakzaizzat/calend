@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Card = ({ title, children, action }) => {
   return (
@@ -24,6 +25,10 @@ const Card = ({ title, children, action }) => {
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
 };
 
 export default Card;

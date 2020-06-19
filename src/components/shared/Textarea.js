@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Textarea = ({ id, label, value, onChange }) => {
   return (
@@ -20,6 +21,11 @@ const Textarea = ({ id, label, value, onChange }) => {
       />
     </div>
   );
+};
+
+Textarea.propTypes = {
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 export default Textarea;

@@ -15,7 +15,7 @@ const CardContainer = styled.div`
 const Book = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(null);
   const [intervalOptions, setIntervalOptions] = useState([]);
   const [timeslot, setTimeslot] = useState("");
