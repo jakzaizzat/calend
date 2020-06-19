@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { intervals } from "../../utils/getTimeSlot";
-import { uuid } from "uuidv4";
 
 import BookingInfo from "../../components/Booking/BookingInfo";
 import BookingTimePicker from "../../components/Booking/BookingTimePicker";
@@ -22,18 +21,18 @@ const Book = () => {
   const [activeTime, setActiveTime] = useState(null);
   const [timeSection, setTimeSection] = useState(true);
 
-  const calculateInterval = (from, to, duration) => {
-    let results = intervals(from, to, duration);
-    return results.map((result) => {
-      return {
-        id: uuid(),
-        value: result,
-      };
-    });
-  };
-
   const toggleSection = () => {
     setTimeSection(!timeSection);
+  };
+
+  const generateTimeslot = (timeFrom, timeTo, duration) => {
+    const date = new Date(timeFrom);
+    const tomorrow = new Date(date);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    let results = intervals(timeFrom, tomorrow, duration);
+    setIntervalOptions(results);
+    setTimeslot(results[0].value);
   };
 
   useEffect(() => {
@@ -43,14 +42,7 @@ const Book = () => {
     const event = events.find((event) => event.id === id);
     setEvent(event);
 
-    let results = calculateInterval(
-      event.timeFrom,
-      event.timeTo,
-      event.duration
-    );
-
-    setIntervalOptions(results);
-    setTimeslot(results[0].value);
+    generateTimeslot(event.timeFrom, event.timeTo, event.duration);
   }, [id]);
 
   return (
@@ -79,6 +71,7 @@ const Book = () => {
                   }}
                   handleDateChanges={(date) => {
                     setSelectedDate(date);
+                    generateTimeslot(date, date, event.duration);
                   }}
                 />
               ) : (
