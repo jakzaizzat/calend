@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import toast from "toasted-notes";
 import PropTypes from "prop-types";
 
-const BookingForm = ({ id, date, timeslot }) => {
+const BookingForm = ({ id, date, timeslot, ...props }) => {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = (data, e) => {
@@ -19,7 +19,8 @@ const BookingForm = ({ id, date, timeslot }) => {
     events[index].submissions.push(payload);
     localStorage.setItem("events", JSON.stringify(events));
     toast.notify("Submission created 🎉");
-    reset({});
+    props.reset();
+    reset();
   };
 
   return (

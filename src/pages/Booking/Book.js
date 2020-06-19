@@ -13,6 +13,7 @@ const CardContainer = styled.div`
 `;
 const Book = () => {
   const { id } = useParams();
+
   const [event, setEvent] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(null);
@@ -90,7 +91,16 @@ const Book = () => {
                     </svg>
                   </button>
                   <div className="h-full flex items-center">
-                    <BookingForm id={id} date={date} timeslot={timeslot} />
+                    <BookingForm
+                      id={id}
+                      date={date}
+                      timeslot={timeslot}
+                      reset={() => {
+                        toggleSection();
+                        setSelectedDate(null);
+                        setActiveTime(null);
+                      }}
+                    />
                   </div>
                 </div>
               )}
