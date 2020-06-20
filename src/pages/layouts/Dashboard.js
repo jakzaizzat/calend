@@ -7,7 +7,7 @@ import mock from "../../config/mock";
 import { eventsData } from "../../api/demo";
 
 const DashboardLayout = (props) => {
-  const { auth, setAuth } = useContext(UserContext);
+  const { setAuth } = useContext(UserContext);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

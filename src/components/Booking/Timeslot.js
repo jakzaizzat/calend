@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { BookingContext } from "../../context/BookingContext";
 import Moment from "react-moment";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Timeslot = ({ activeDate, time, ...props }) => {
+const Timeslot = ({ time, ...props }) => {
+  const { setActiveTime, toggleSection } = useContext(BookingContext);
   const [active, setActive] = useState(false);
   const handleActive = () => {
     setActive(!active);
@@ -27,7 +29,8 @@ const Timeslot = ({ activeDate, time, ...props }) => {
         {active ? (
           <button
             onClick={() => {
-              props.setActiveTime(time);
+              setActiveTime(time);
+              toggleSection();
             }}
             className="w-1/2 flex items-center justify-center  items-center px-4 py-3 border border-transparent text-sm leading-4 font-medium rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
           >

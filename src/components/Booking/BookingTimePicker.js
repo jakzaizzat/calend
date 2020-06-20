@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BookingContext } from "../../context/BookingContext";
 import Calendar from "./Calendar";
 import Moment from "react-moment";
 import Timeslot from "./Timeslot";
@@ -16,6 +17,7 @@ const BookingTimePicker = ({
   selectedDate,
   ...props
 }) => {
+  const { setSelectedDate } = useContext(BookingContext);
   return (
     <>
       <h3 className="font-medium text-gray-800 mb-3">Select a Date & Time</h3>
@@ -24,7 +26,7 @@ const BookingTimePicker = ({
           <Calendar
             value={selectedDate}
             onChange={(date) => {
-              props.handleDateChanges(date);
+              setSelectedDate(date);
             }}
           />
         </div>
@@ -35,14 +37,7 @@ const BookingTimePicker = ({
             </p>
 
             {intervalOptions.map((time) => (
-              <Timeslot
-                key={time.value}
-                time={time}
-                activeDate={activeTime}
-                setActiveTime={(timeslot) => {
-                  props.handleTimeslotChange(timeslot);
-                }}
-              />
+              <Timeslot key={time.value} time={time} />
             ))}
           </TimeScrollContainer>
         ) : null}

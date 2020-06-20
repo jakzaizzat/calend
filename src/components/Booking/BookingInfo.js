@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Moment from "react-moment";
 import PropTypes from "prop-types";
+import { BookingContext } from "../../context/BookingContext";
 
-const BookingInfo = ({ activeTime, event, selectedDate }) => {
+const BookingInfo = ({ activeTime, event }) => {
+  const { selectedDate } = useContext(BookingContext);
   return (
     <>
       <p className="text-gray-600 uppercase text-xs tracking-wide">Aizzat</p>

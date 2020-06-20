@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { BookingContext } from "../../context/BookingContext";
 import { intervals } from "../../utils/getTimeSlot";
 
 import BookingInfo from "../../components/Booking/BookingInfo";
@@ -15,16 +16,19 @@ const Book = () => {
   const { id } = useParams();
 
   const [event, setEvent] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
+
+  const {
+    selectedDate,
+    setSelectedDate,
+    activeTime,
+    setActiveTime,
+    timeSection,
+    toggleSection,
+  } = useContext(BookingContext);
+
   const [date, setDate] = useState(null);
   const [intervalOptions, setIntervalOptions] = useState([]);
   const [timeslot, setTimeslot] = useState("");
-  const [activeTime, setActiveTime] = useState(null);
-  const [timeSection, setTimeSection] = useState(true);
-
-  const toggleSection = () => {
-    setTimeSection(!timeSection);
-  };
 
   const generateTimeslot = (timeFrom, timeTo, duration) => {
     const date = new Date(timeFrom);
@@ -46,6 +50,12 @@ const Book = () => {
     generateTimeslot(event.timeFrom, event.timeTo, event.duration);
   }, [id]);
 
+  useEffect(() => {
+    if (selectedDate) {
+      generateTimeslot(selectedDate, selectedDate, event.duration);
+    }
+  }, [selectedDate]);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-indigo-600">
       {!event ? (
@@ -66,14 +76,6 @@ const Book = () => {
                   activeTime={activeTime}
                   intervalOptions={intervalOptions}
                   selectedDate={selectedDate}
-                  handleTimeslotChange={(timeslot) => {
-                    setActiveTime(timeslot);
-                    toggleSection();
-                  }}
-                  handleDateChanges={(date) => {
-                    setSelectedDate(date);
-                    generateTimeslot(date, date, event.duration);
-                  }}
                 />
               ) : (
                 <div className="h-full">
