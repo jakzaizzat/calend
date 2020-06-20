@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { UserContext } from "../../state/UserContext";
+import { UserContext } from "../../context/UserContext";
 import toast from "toasted-notes";
 
 const Navigation = () => {
-  const { setAuth } = useContext(UserContext);
+  const { auth, setAuth } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
 
   let history = useHistory();
@@ -57,6 +57,9 @@ const Navigation = () => {
                     aria-orientation="vertical"
                     aria-labelledby="user-menu"
                   >
+                    <div className="block px-4 w-full text-left py-2 text-sm text-gray-700">
+                      {auth ? auth.username : "Guest"}
+                    </div>
                     <button
                       onClick={handleLogout}
                       className="block px-4 w-full text-left py-2 text-sm text-gray-700 hover:bg-gray-100"

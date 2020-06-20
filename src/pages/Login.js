@@ -4,7 +4,7 @@ import BaseButton from "../components/shared/BaseButton";
 import toast from "toasted-notes";
 import * as authAPI from "../api/auth-api-mock";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../state/UserContext";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   const { setAuth } = useContext(UserContext);
