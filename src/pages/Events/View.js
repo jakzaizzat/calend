@@ -82,7 +82,7 @@ class EventView extends Component {
                           {window.location.origin}/book/{event.id}
                         </Link>
                         <CopyToClipboard
-                          text={window.location.origin + "/booking/" + event.id}
+                          text={window.location.origin + "/book/" + event.id}
                           onCopy={() => {
                             toast.notify("Link copied");
                           }}
